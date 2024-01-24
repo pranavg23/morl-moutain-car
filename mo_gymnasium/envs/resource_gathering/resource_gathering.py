@@ -308,9 +308,9 @@ class ResourceGathering(gym.Env, EzPickle):
 
 
 if __name__ == "__main__":
-    import mo_gymnasium as mo_gym
+    import mo_gymnasium as mo_gymnasium
 
-    env = mo_gym.make("resource-gathering-v0", render_mode="human")
+    env = mo_gymnasium.make("resource-gathering-v0", render_mode="human")
     terminated = False
     env.reset()
     while True:

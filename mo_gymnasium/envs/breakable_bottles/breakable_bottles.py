@@ -316,9 +316,9 @@ class BreakableBottles(Env, EzPickle):
 
 
 if __name__ == "__main__":
-    import mo_gymnasium as mo_gym
+    import mo_gymnasium as mo_gymnasium
 
-    env = mo_gym.make("breakable-bottles-v0", render_mode="human")
+    env = mo_gymnasium.make("breakable-bottles-v0", render_mode="human")
 
     done = False
     obs, info = env.reset()

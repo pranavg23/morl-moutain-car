@@ -10,7 +10,7 @@ from gymnasium.utils import EzPickle, seeding
 from gymnasium.wrappers import GrayScaleObservation, ResizeObservation
 from nes_py.nes_env import SCREEN_SHAPE_24_BIT
 
-import mo_gymnasium as mo_gym
+import mo_gymnasium as mo_gymnasium
 
 # from nes_py.wrappers import JoypadSpace
 from mo_gymnasium.envs.mario.joypad_space import JoypadSpace
@@ -208,7 +208,7 @@ if __name__ == "__main__":
     env = ResizeObservation(env, (84, 84))
     env = GrayScaleObservation(env)
     # env = FrameStack(env, 4)
-    env = mo_gym.LinearReward(env)
+    env = mo_gymnasium.LinearReward(env)
 
     terminated = False
     env.reset()

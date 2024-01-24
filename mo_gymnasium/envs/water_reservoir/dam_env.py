@@ -297,9 +297,9 @@ class DamEnv(gym.Env, EzPickle):
 
 
 if __name__ == "__main__":
-    import mo_gymnasium as mo_gym
+    import mo_gymnasium as mo_gymnasium
 
-    env = mo_gym.make("water-reservoir-v0", render_mode="human")
+    env = mo_gymnasium.make("water-reservoir-v0", render_mode="human")
     obs, info = env.reset()
     while True:
         action = env.state

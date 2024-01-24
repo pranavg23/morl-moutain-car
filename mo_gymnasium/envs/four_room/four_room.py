@@ -372,9 +372,9 @@ def draw_line_dashed(surface, color, start_pos, end_pos, width=1, dash_length=3,
 
 
 if __name__ == "__main__":
-    import mo_gymnasium as mo_gym
+    import mo_gymnasium as mo_gymnasium
 
-    env = mo_gym.make("four-room-v0", render_mode="human")
+    env = mo_gymnasium.make("four-room-v0", render_mode="human")
     terminated = False
     env.reset()
     while True:
