@@ -48,4 +48,5 @@ class MOMountainCar(MountainCarEnv, EzPickle):
         self.state = (position, velocity)
         if self.render_mode == "human":
             self.render()
+        print(reward)
         return np.array(self.state, dtype=np.float32), reward, terminated, False, {}
