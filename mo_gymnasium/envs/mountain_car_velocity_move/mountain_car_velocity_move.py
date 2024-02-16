@@ -26,6 +26,8 @@ class MOMountainCar(MountainCarEnv, EzPickle):
 
         self.reward_space = spaces.Box(low=np.array([-1, 0]), high=np.array([0, 1.1]), shape=(2,), dtype=np.float32)
         self.reward_dim = 2
+        self.episode_reward = []
+        self.single_episode = []
         print(self.reward_space)
 
     def step(self, action: int):
@@ -48,5 +50,7 @@ class MOMountainCar(MountainCarEnv, EzPickle):
         self.state = (position, velocity)
         if self.render_mode == "human":
             self.render()
-        print(reward)
+        self.single_episode.append(reward)
+
+        #Reward is an array
         return np.array(self.state, dtype=np.float32), reward, terminated, False, {}
