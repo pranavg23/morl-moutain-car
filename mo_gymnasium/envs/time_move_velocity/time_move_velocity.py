@@ -26,7 +26,7 @@ class MOMountainCar(MountainCarEnv, EzPickle):
 
         # self.reward_space = spaces.Box(low=np.array([-1, -1, 0]), high=np.array([-1, 0, math.inf]), shape=(3,), dtype=np.float32)
         # self.reward_dim = 3
-        self.reward_space = spaces.Box(low=np.array([-1, -1, -1]), high=np.array([-1, 0, 0]), shape=(3,), dtype=np.float32)
+        self.reward_space = spaces.Box(low=np.array([-1, -1]), high=np.array([-1, 0, 0]), shape=(3,), dtype=np.float32)
         self.reward_dim = 3
         print(self.reward_space)
 
