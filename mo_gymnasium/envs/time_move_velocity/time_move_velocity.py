@@ -48,10 +48,14 @@ class MOMountainCar(MountainCarEnv, EzPickle):
 
         terminated = bool(position >= self.goal_position and velocity >= self.goal_velocity)
         # reward = -1.0
-        reward = np.zeros(3, dtype=np.float32)
-        reward[0] = 0.0 if terminated else -1.0  # time penalty
-        reward[1] = 0.0 if action == 1 else -1.0 #Movement
-        reward[2] = 15*abs(velocity) #Rewarding magnitude of velocity
+        # reward = np.zeros(3, dtype=np.float32)
+        # reward[0] = 0.0 if terminated else -1.0  # time penalty
+        # reward[1] = 0.0 if action == 1 else -1.0 #Movement
+        # reward[2] = 15*abs(velocity) #Rewarding magnitude of velocity
+
+        reward = np.zeros(2, dtype=np.float32)
+        reward[0] = 0.0 if action == 1 else -1.0  # movement penalty
+        reward[1] = 15*abs(velocity) #Rewarding magnitude of velocity
 
         self.state = (position, velocity)
         if self.render_mode == "human":
