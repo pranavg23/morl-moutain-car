@@ -24,7 +24,7 @@ class MOMountainCar(MountainCarEnv, EzPickle):
         super().__init__(render_mode, goal_velocity)
         EzPickle.__init__(self, render_mode, goal_velocity)
 
-        self.reward_space = spaces.Box(low=np.array([-1, -1, -1]), high=np.array([-1, 0, 0]), shape=(3,), dtype=np.float32)
+        self.reward_space = spaces.Box(low=np.array([-1, -1, 0]), high=np.array([-1, 0, math.inf]), shape=(3,), dtype=np.float32)
         self.reward_dim = 3
 
     def step(self, action: int):
@@ -42,8 +42,8 @@ class MOMountainCar(MountainCarEnv, EzPickle):
         # reward = -1.0
         reward = np.zeros(3, dtype=np.float32)
         reward[0] = 0.0 if terminated else -1.0  # time penalty
-        reward[1] = 0.0 if action != 0 else -1.0  # reverse penalty
-        reward[2] = 0.0 if action != 2 else -1.0  # forward penalty
+        reward[1] = 0.0 if action == 1 else -1.0  # movement penalty
+        reward[2] = 15*abs(velocity) #Rewarding magnitude of velocity
 
         self.state = (position, velocity)
         if self.render_mode == "human":
