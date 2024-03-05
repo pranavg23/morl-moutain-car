@@ -24,16 +24,16 @@ class MOMountainCar(MountainCarEnv, EzPickle):
         super().__init__(render_mode, goal_velocity)
         EzPickle.__init__(self, render_mode, goal_velocity)
 
-        self.reward_space = spaces.Box(low=np.array([-1, -1]), high=np.array([-1, 0]), shape=(2,), dtype=np.float32)
-        self.reward_dim = 2
-        print(self.reward_space)
+        self.reward_space = spaces.Box(low=np.array([-1, -1, 0]), high=np.array([-1, 0, math.inf]), shape=(3,), dtype=np.float32)
+        self.reward_dim = 3
 
     def step(self, action: int):
         assert self.action_space.contains(action), f"{action!r} ({type(action)}) invalid"
 
         position, velocity = self.state
         velocity += (action - 1) * self.force + math.cos(3 * position) * (-self.gravity)
-        velocity = np.clip(velocity, -self.max_speed, self.max_speed) #Do we need consider changing the clipping?
+        velocity = np.clip(velocity, -self.max_speed, self.max_speed)
+        prev_position = position
         position += velocity
         position = np.clip(position, self.min_position, self.max_position)
         if position == self.min_position and velocity < 0:
@@ -41,9 +41,10 @@ class MOMountainCar(MountainCarEnv, EzPickle):
 
         terminated = bool(position >= self.goal_position and velocity >= self.goal_velocity)
         # reward = -1.0
-        reward = np.zeros(2, dtype=np.float32)
+        reward = np.zeros(3, dtype=np.float32)
         reward[0] = 0.0 if terminated else -1.0  # time penalty
-        reward[1] = 500*velocity*velocity #Rewarding magnitude of velocity
+        reward[1] = abs(position - prev_position)
+        reward[2] = 15*abs(velocity) #Rewarding magnitude of velocity
 
         self.state = (position, velocity)
         if self.render_mode == "human":
