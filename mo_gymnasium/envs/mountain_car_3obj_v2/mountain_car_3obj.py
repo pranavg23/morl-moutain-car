@@ -43,8 +43,8 @@ class MOMountainCar(MountainCarEnv, EzPickle):
         # reward = -1.0
         reward = np.zeros(3, dtype=np.float32)
         reward[0] = 0.0 if terminated else -1.0  # time penalty
-        reward[1] = abs(position - prev_position)
-        reward[2] = 15*abs(velocity) #Rewarding magnitude of velocity
+        reward[1] = -abs(position - prev_position)
+        reward[2] = abs(velocity) #Rewarding magnitude of velocity
 
         self.state = (position, velocity)
         if self.render_mode == "human":
